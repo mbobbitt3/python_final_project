@@ -7,12 +7,9 @@ from ghidra.util.task import ConsoleTaskMonitor
 class ProgramBase:
 	"""utiity functions and intiializations to be inherited from in the CFG class"""
 	def __init__(self, offset):
-		self.edge_map = OrderedDict()
 		self.prog = getCurrentProgram() 
 		self.monitor = ConsoleTaskMonitor()
 		self._func = self.func_conv(offset)
-		self.model = SimpleBlockModel(self.prog)
-		self.block_iter = self.model.getCodeBlocksContaining(self._func.getBody(), self.monitor)
 
 	def func_conv(self, offset):
 		"""Convert a raw hex address into a Ghidra function object"""
@@ -33,6 +30,11 @@ class ProgramBase:
 # Derived class for control flow graph operations
 class CFG(ProgramBase):
 	"""class to create the contorl flow graph and save it to json file"""
+	def __init__(self):
+		self.model = SimpleBlockModel(self.prog)
+		self.block_iter = self.model.getCodeBlocksContaining(self._func.getBody(), self.monitor)
+		self.edge_map = OrderedDict()
+
 	def gen_cfg_dict(self):
 		"""Generate a control flow graph dictionary by iterating through basic blocks and grabbing their respecitve
 		destinations and flow type. Hey are then able to be stored into a json file"""
