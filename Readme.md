@@ -1,4 +1,4 @@
-1. first run install.sh as sudo
+1. first install unzip command from apt if you don't have it already using "sudo apt install unzip" and then run install.sh 
 then install the version of JDK at this link for linux x64 https://adoptium.net/temurin/releases/
 2. follow instructions for setting up JDK with ghidra here. https://github.com/NationalSecurityAgency/ghidra/tree/master
 3. then run run_scripts.sh 
