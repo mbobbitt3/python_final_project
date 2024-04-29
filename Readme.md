@@ -6,3 +6,5 @@ then install the version of JDK at this link for linux x64 https://adoptium.net/
 graph_generation.py script using python from the command line
 5. use pip to isntall networkx, matplotlib, and seaborn 
 NOTE: MAKE SURE SCRIPTS ARE RAN FROM THE ROOT PROOJECT DIRECTORY
+NOTE: if you can't get ghidra to work, the output is already provided in the project you can just run
+python scripts/graph_generation.py from the project directory and it will work.
