@@ -5,7 +5,7 @@ import matplotlib.colors as mcolors
 import seaborn as sns
 import random
 class Cfg_Graph:
-
+	"""this class is used to create a graph object and then generate a visualization from the graph object in networkx"""
 	def __init__(self):
 		with open("cfg_json_files/sample_out_main.json", 'r') as fd:
 			self.dict = json.load(fd)
@@ -54,7 +54,7 @@ class Cfg_Graph:
 
 
 	def rgb_to_hex(self, rgb_tuple):
-		# Ensure RGB tuple values are in the range [0, 1]
+		"""networkx expects hex not tuple values for colors, so we need this method to convert our tuple values into hex"""
 		if not all(0 <= v <= 1 for v in rgb_tuple):
 			raise ValueError("RGB values should be between 0 and 1")
 		
@@ -62,14 +62,14 @@ class Cfg_Graph:
 		return mcolors.to_hex(rgb_tuple)
 
 	def create_graph(self):
-		# Loop through each key-value pair in the dictionary
+		# Loop through each key-value pair in the dictionary and add edges accordingly
 		for source, target, flow_type in self.cfg:
 			print(source, target, flow_type)
 			self.graph.add_edge(source, target, color = self.type_to_color[flow_type])	# Add edge from source to target
 		return self.graph
 	
 	def visualize_graph(self, graph):
-		# Generate the visualization
+		# Generate the visualization from the created graph object
 		plt.figure(figsize=(100, 60))
 		pos = nx.nx_agraph.graphviz_layout(self.graph, prog='dot')	# Positions for all nodes
 		nx.draw(self.graph, pos, with_labels=True, node_size=700, node_color='lightblue', edge_color='gray', font_size=7)
